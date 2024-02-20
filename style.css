@@ -1,0 +1,60 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.header {
+    text-align: center;
+}
+
+ul {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 400px));
+    grid-template-rows: 1fr;
+    grid-auto-rows: 1fr;
+    row-gap: 20px;
+    justify-items: center;
+    justify-content: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border: 2px solid black;
+}
+
+li {
+    display: grid;
+}
+
+.book-card {
+    background-color: #ffedd5; /*'Orange' color pallet*/
+    min-width: 280px;
+    width: 380px;
+    border-radius: 20px;
+    border: 2px solid red;
+}
+
+.book-info {
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center;
+    padding: 2px 30px;
+    /* border: 2px solid green; */
+}
+
+h3 {
+    margin: 5px 0 0 0;
+    justify-self: center;
+    text-align: center;
+}
+
+p {
+    margin: 15px 0 0 0;
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    margin: 25px 0 8px 0;
+}

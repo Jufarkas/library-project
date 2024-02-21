@@ -22,7 +22,7 @@
                     <label for="readStatus" class="statusLabel">Have you read this book?
                         <select name="read-status" id="readStatus">
                             <option value="read">Read</option>
-                            <option value="not-read">Not yet read</option>
+                            <option value="not yet read">Not yet read</option>
                         </select>
                     </label>
                 </fieldset>
@@ -33,41 +33,19 @@
             </form>
           </dialog>
           <button class="showDialog">Add New Book</button>
-
-        <!-- books are placeholders; once complete should delete all list items except the first (can become a placeholder that holds the button to add a new book or something), and have new DOM items get added to the grid with each book the user adds -->
-
-
         <ul class="book-list">
-            <li class="book-card">
-                <h3 class="book-info title">Title</h3>
-                <p class="book-info author">Author:</p>
-                <p class="book-info pages">Pages:</p>
-                <p class="book-info hasRead">Status:</p>
-                <div class="buttons">
-                    <button class="readToggle">Mark as read</button>
-                    <button class="delete">Delete</button>
-                </div>
-            </li>
-            <!-- <li class="book-card">
-                <h3 class="book-info title">Frankenstein; or, The Modern Prometheus</h3>
-                <p class="book-info author">Author: Mary Shelley</p>
-                <p class="book-info pages">Pages: 280</p>
-                <p class="book-info hasRead">Status:</p>
-                <div class="buttons">
-                    <button class="readToggle">Mark as read</button>                         
-                    <button class="delete">Delete</button>
-                </div>
-            </li>
-            <li class="book-card">
-                <h3 class="book-info title">The Curious Incident of the Dog in the Night-Time</h3>
-                <p class="book-info author">Author: Mark Haddon</p>
-                <p class="book-info pages">Pages: 274</p>
-                <p class="book-info hasRead">Status:</p>
-                <div class="buttons">
-                    <button class="readToggle">Mark as read</button>
-                    <button class="delete">Delete</button>
-                </div>
-            </li> -->
+            <div class="wrapper">
+                <li class="book-card">
+                    <h3 class="book-info title">Title</h3>
+                    <p class="book-info author">Author:</p>
+                    <p class="book-info pages">Pages:</p>
+                    <p class="book-info hasRead">Status:</p>
+                    <div class="buttons">
+                        <button class="readToggle">Mark as read</button>
+                        <button class="delete">Delete</button>
+                    </div>
+                </li>
+            </div>
         </ul>
     </div>
 </body>

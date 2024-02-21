@@ -12,6 +12,10 @@ body {
     text-align: center;
 }
 
+.wrapper {
+    display: none;
+}
+
 /* for the dialog box and form + form items */
 ::backdrop {
     background-color: rgba(255, 255, 255, 0.836);
@@ -64,29 +68,11 @@ ul {
     list-style: none;
     margin: 0;
     padding: 0;
-    border: 2px solid black;
+    border: 2px solid black; /* delete this once completed */
 }
 
 li {
     display: grid;
-}
-
-
-/* Book cards containing book information */
-.book-card {
-    background-color: #e7e5e4; /*'Stone' color pallet*/
-    min-width: 280px;
-    width: 380px;
-    border-radius: 20px;
-    border: 2px solid red;
-}
-
-.book-info {
-    display: flex;
-    flex-wrap: wrap;
-    align-content: center;
-    padding: 2px 30px;
-    /* border: 2px solid green; */
 }
 
 h3 {
@@ -105,5 +91,23 @@ p {
     align-items: center;
     gap: 20px;
     margin: 25px 0 8px 0;
+}
+
+
+/* Book cards containing book information */
+.book-card {
+    background-color: #e7e5e4; /*'Stone' color pallet*/
+    min-width: 280px;
+    width: 380px;
+    border-radius: 20px;
+    border: 2px solid red;
+}
+
+.book-info {
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center;
+    padding: 2px 30px;
+    /* border: 2px solid green; */
 }
 

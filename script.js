@@ -3,18 +3,63 @@ const deleteBtn = document.querySelectorAll('.delete');
 const dialog = document.querySelector('dialog');
 const addNewBook = document.querySelector('.showDialog');
 const submit = document.querySelector('.formConfirm');
+const bookList = document.querySelector('.book-list');
+const wrapper = document.querySelector('.wrapper');
 let title;
 let author;
 let pages;
 let hasRead;
+const myLibrary = [];
 
 
+
+// constructor:
+function Book(title, author, pages, hasRead) {
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
+    this.hasRead = hasRead;
+    // have 2 options "read" "not read"
+}
+
+
+function createNewBook(title, author, pages, hasRead){
+    let i = myLibrary.length + 1;
+    let newBook = `book${i}`;
+    newBook = new Book(title, author, pages, hasRead);
+    console.log(newBook);
+
+   //clone the list and apply all the values to the textContent 
+    let children = wrapper.childNodes;
+    children.forEach((item) => {
+        let newNode = item.cloneNode(true);
+        bookList.appendChild(newNode);
+    })
+}
+
+// look into cloneNode()
+
+// open dialog box to submit new book
 addNewBook.addEventListener('click', () => {
+    document.getElementById('bookTitle').value = '';
+    document.getElementById('bookAuthor').value = '';
+    document.getElementById('bookPages').value = '';
     dialog.showModal();
 });
 
-submit.addEventListener('click', () => {
-    alert ("clicked");
+// Grabs values from form inputs, makes new book(x) (x = array.length + 1), and creates new Book with constructor
+
+submit.addEventListener('click', (e) => {
+    e.preventDefault();
+    title = document.getElementById('bookTitle').value;
+    author = document.getElementById('bookAuthor').value;
+    pages = document.getElementById('bookPages').value;
+    hasRead = document.getElementById('readStatus').value;
+    createNewBook(title, author, pages, hasRead);
+
+    // adds new book to library array so that it can be searched for and closes dialog box
+    myLibrary.push(title);
+    dialog.close();
 })
 
 
@@ -37,39 +82,30 @@ submit.addEventListener('click', () => {
 // });
 
 
-// deleteBtn.addEventListener('click', () => {
-//     let bookList = document.querySelector('.book-list')
-//     bookList.removeChild()
-// })
+// watches ul element for a button ( = 'delete) click and removes that item
+bookList.addEventListener('click', (e) => {
+    const target = e.target;
+    let x = target.parentNode;
+    if (target.classList.contains('delete')) {
+        x.parentNode.remove()
+    }
+    // removeBook(x);
+});
+
+//Set a variable to be = title.textContent()
+//splice out "title.textContent()" variable from the array using a function that checks
+//the array index against the title variable, and removes it when you click delete          
+
+// function removeBook(x){
+//     let item = title.textContent(); //<-- change this syntax, just a placeholder
+//     const index = array.indexOf(item);
+//     if (index > -1) {               //<-- only splice array when item is found
+//         array.splice(index, 1);     //<-- 2nd parameter means remove one item only
+//     }
+// };
 
 
 
-const myLibrary = [];
-
-// constructor:
-function Book(title, author, pages, hasRead) {
-    this.title = title;
-    this.author = author;
-    this.pages = pages;
-    this.hasRead = hasRead;
-    // have 2 options "read" "not read"
-}
-
-// placeholder books for now to help build around
-const book1 = new Book('IT', 'Stephen King', 1138, 'read');
-const book2 = new Book('Frankenstein; or, The Modern Prometheus', 'Mary Shelley', 280, 'read');
-const book3 = new Book('Stories of Your Life and Others', 'Ted Chiang', 333, 'not read');
-const book4 = new Book('The Curious Incident of the Dog in the Night-Time', 'Mark Haddon', 274, 'read');
-const book5 = new Book('Hatchet', 'Gary Paulsen', 186, 'read');
-const book6 = new Book('Contact', 'Carl Sagan', 432, 'not read');
-
-
-
-function addBookToLibrary() {
-
-}
-
-
-function bookCheck(){
+// function bookCheck(){
     
-}
+// }

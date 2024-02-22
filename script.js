@@ -28,7 +28,6 @@ function createNewBook(title, author, pages, hasRead){
     let newBook = `book${i}`;
     newBook = new Book(title, author, pages, hasRead);
     console.log(newBook);
-
    //clone the list and apply all the values to the textContent 
     let children = wrapper.childNodes;
     children.forEach((item) => {
@@ -36,8 +35,6 @@ function createNewBook(title, author, pages, hasRead){
         bookList.appendChild(newNode);
     })
 }
-
-// look into cloneNode()
 
 // open dialog box to submit new book
 addNewBook.addEventListener('click', () => {
@@ -47,7 +44,7 @@ addNewBook.addEventListener('click', () => {
     dialog.showModal();
 });
 
-// Grabs values from form inputs, makes new book(x) (x = array.length + 1), and creates new Book with constructor
+// Grabs values from form inputs, creates new Book with function, adds book title to array, closes dialog box
 
 submit.addEventListener('click', (e) => {
     e.preventDefault();
@@ -63,7 +60,7 @@ submit.addEventListener('click', (e) => {
 })
 
 
-// change 'read' status
+// change 'read' status, will have to setup similar to the delete button
 
 // readBtn.forEach(function(button){
 //     button.addEventListener('click', () => {
@@ -92,12 +89,13 @@ bookList.addEventListener('click', (e) => {
     // removeBook(x);
 });
 
-//Set a variable to be = title.textContent()
-//splice out "title.textContent()" variable from the array using a function that checks
-//the array index against the title variable, and removes it when you click delete          
+
+//Set a variable to be = title.textContent
+//splice out "title.textContent" variable from the array using a function that checks
+//the array index against the title, and removes it when you click delete          
 
 // function removeBook(x){
-//     let item = title.textContent(); //<-- change this syntax, just a placeholder
+//     let item = title.textContent;
 //     const index = array.indexOf(item);
 //     if (index > -1) {               //<-- only splice array when item is found
 //         array.splice(index, 1);     //<-- 2nd parameter means remove one item only

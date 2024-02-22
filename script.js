@@ -9,7 +9,8 @@ let title;
 let author;
 let pages;
 let hasRead;
-const myLibrary = [];
+let myLibrary = [];
+
 
 
 
@@ -19,16 +20,22 @@ function Book(title, author, pages, hasRead) {
     this.author = author;
     this.pages = pages;
     this.hasRead = hasRead;
-    // have 2 options "read" "not read"
 }
 
 
+// creates new book with Book constructor; adds to myLibrary array; cloneNode's list item template (hidden '.wrapper') with new book information
 function createNewBook(title, author, pages, hasRead){
-    let i = myLibrary.length + 1;
-    let newBook = `book${i}`;
-    newBook = new Book(title, author, pages, hasRead);
-    console.log(newBook);
-   //clone the list and apply all the values to the textContent 
+    let newTitle = document.querySelector('.title');
+    let newAuthor = document.querySelector('.author');
+    let newPages = document.querySelector('.pages');
+    let newStatus = document.querySelector('.status');
+    newTitle.textContent = title;
+    newAuthor.textContent = 'Author: ' + author;
+    newPages.textContent = 'Pages: ' + pages;
+    newStatus.textContent = 'Status: ' + hasRead;
+    let book = title;
+    myLibrary[book] = new Book(title, author, pages, hasRead);
+    console.log(myLibrary);
     let children = wrapper.childNodes;
     children.forEach((item) => {
         let newNode = item.cloneNode(true);
@@ -36,7 +43,8 @@ function createNewBook(title, author, pages, hasRead){
     })
 }
 
-// open dialog box to submit new book
+
+// open dialog box to submit new book; clears any previous values
 addNewBook.addEventListener('click', () => {
     document.getElementById('bookTitle').value = '';
     document.getElementById('bookAuthor').value = '';
@@ -44,7 +52,7 @@ addNewBook.addEventListener('click', () => {
     dialog.showModal();
 });
 
-// Grabs values from form inputs, creates new Book with function, adds book title to array, closes dialog box
+// Grabs values from form inputs, creates new Book with function, closes dialog box
 
 submit.addEventListener('click', (e) => {
     e.preventDefault();
@@ -53,30 +61,13 @@ submit.addEventListener('click', (e) => {
     pages = document.getElementById('bookPages').value;
     hasRead = document.getElementById('readStatus').value;
     createNewBook(title, author, pages, hasRead);
-
-    // adds new book to library array so that it can be searched for and closes dialog box
-    myLibrary.push(title);
     dialog.close();
 })
 
 
-// change 'read' status, will have to setup similar to the delete button
+// create change 'read' status below; need to rewrite
 
-// readBtn.forEach(function(button){
-//     button.addEventListener('click', () => {
-//         let readStatus = document.querySelectorAll('.hasRead');
-//         if(hasRead.textContent === "Status:"){
-//             readStatus.textContent = "Status: read";
-//             button.textContent = "Mark as unread"
-//         } else if (readStatus.textContent === "Status: read") {
-//             readStatus.textContent = "Status: not yet read";
-//             button.textContent = "Mark as read";
-//         } else {
-//             readStatus.textContent = "Status: read";
-//             button.textContent = "Mark as unread";
-//         }
-//     })
-// });
+
 
 
 // watches ul element for a button ( = 'delete) click and removes that item
@@ -86,24 +77,18 @@ bookList.addEventListener('click', (e) => {
     if (target.classList.contains('delete')) {
         x.parentNode.remove()
     }
-    // removeBook(x);
+    // removeBook();
 });
 
 
-//Set a variable to be = title.textContent
+//Set a variable to be = title.textContent of the item that's selected
 //splice out "title.textContent" variable from the array using a function that checks
 //the array index against the title, and removes it when you click delete          
 
-// function removeBook(x){
-//     let item = title.textContent;
-//     const index = array.indexOf(item);
-//     if (index > -1) {               //<-- only splice array when item is found
-//         array.splice(index, 1);     //<-- 2nd parameter means remove one item only
+// function removeBook(){
+//     for(let i = myLibrary.length - 1; i >= 0; i--){
+//         if(myLibrary[i].title == title){
+//             myLibrary.splice(i, 1);
+//         }
 //     }
 // };
-
-
-
-// function bookCheck(){
-    
-// }

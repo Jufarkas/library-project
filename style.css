@@ -180,10 +180,12 @@ h3 {
     margin: 5px 0 0 0;
     justify-self: center;
     text-align: center;
+    font-size: 24px;
 }
 
 p {
     margin: 15px 0 0 0;
+    font-size: 18px;
 }
 
 .buttons {
@@ -206,7 +208,7 @@ p {
     cursor: pointer;
     display: inline-flex;
     flex-shrink: 0;
-    font-size: 14px;
+    font-size: 16px;
     line-height: 1.5;
     overflow: hidden;
     padding: 12px 16px;
@@ -253,6 +255,5 @@ p {
     flex-wrap: wrap;
     align-content: center;
     padding: 2px 30px;
-    /* border: 2px solid green; */
 }
 

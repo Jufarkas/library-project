@@ -1,4 +1,3 @@
-const readBtn = document.querySelectorAll('.readToggle')
 const deleteBtn = document.querySelectorAll('.delete');
 const dialog = document.querySelector('dialog');
 const addNewBook = document.querySelector('.showDialog');
@@ -14,7 +13,8 @@ let myLibrary = [];
 
 
 
-// constructor:
+// constructor
+
 function Book(title, author, pages, hasRead) {
     this.title = title;
     this.author = author;
@@ -24,6 +24,7 @@ function Book(title, author, pages, hasRead) {
 
 
 // creates new book with Book constructor; adds to myLibrary array; cloneNode's list item template (hidden '.wrapper') with new book information
+
 function createNewBook(title, author, pages, hasRead){
     let newTitle = document.querySelector('.title');
     let newAuthor = document.querySelector('.author');
@@ -33,18 +34,27 @@ function createNewBook(title, author, pages, hasRead){
     newAuthor.textContent = 'Author: ' + author;
     newPages.textContent = 'Pages: ' + pages;
     newStatus.textContent = 'Status: ' + hasRead;
-    let book = title;
-    myLibrary[book] = new Book(title, author, pages, hasRead);
-    console.log(myLibrary);
+    // assigns new Book title as the key in myLibrary to easily reference later to delete
+    myLibrary[title] = new Book(title, author, pages, hasRead);
+
     let children = wrapper.childNodes;
     children.forEach((item) => {
         let newNode = item.cloneNode(true);
         bookList.appendChild(newNode);
+        // below changes read/unread textcontent depending on user input
+        let status = document.querySelector('.status').textContent;
+        let readBtn = document.querySelector('.readToggle');
+        if(status === "Status: read"){
+            readBtn.textContent = "Mark as unread";
+        } else if (status === "Status: not read") {
+            readBtn.textContent = "Mark as read";
+        }
     })
 }
 
 
-// open dialog box to submit new book; clears any previous values
+// clears any previous values; opens dialog box to submit new book
+
 addNewBook.addEventListener('click', () => {
     document.getElementById('bookTitle').value = '';
     document.getElementById('bookAuthor').value = '';
@@ -52,7 +62,8 @@ addNewBook.addEventListener('click', () => {
     dialog.showModal();
 });
 
-// Grabs values from form inputs, creates new Book with function, closes dialog box
+
+// Grabs form input values via IDs; creates new Book via function; closes dialog box
 
 submit.addEventListener('click', (e) => {
     e.preventDefault();
@@ -61,34 +72,47 @@ submit.addEventListener('click', (e) => {
     pages = document.getElementById('bookPages').value;
     hasRead = document.getElementById('readStatus').value;
     createNewBook(title, author, pages, hasRead);
+
     dialog.close();
 })
 
 
-// create change 'read' status below; need to rewrite
+// watches ul element for a button ( = 'delete) click and removes that element from the DOM; runs function to delete title from array
 
-
-
-
-// watches ul element for a button ( = 'delete) click and removes that item
 bookList.addEventListener('click', (e) => {
     const target = e.target;
     let x = target.parentNode;
+    let book = x.parentNode;
+    // sets bookToDelete to the 'title' of the parent>parent
+    let bookToDelete = book.querySelector('.title').textContent;
     if (target.classList.contains('delete')) {
-        x.parentNode.remove()
+        book.remove();
+        // pass book title into function
+        removeBook(bookToDelete);
+    } else if (target.classList.contains('readToggle')){
+        // changes read/unread status && button
+        let readStatus = book.querySelector('.status');
+        let readBtn = x.querySelector('.readToggle');
+        if(hasRead.textContent === "Status:"){
+            readStatus.textContent = "Status: read";
+            readBtn.textContent = "Mark as unread"
+        } else if (readStatus.textContent === "Status: read") {
+            readStatus.textContent = "Status: not read";
+            readBtn.textContent = "Mark as read";
+        } else {
+            readStatus.textContent = "Status: read";
+            readBtn.textContent = "Mark as unread";
+        }
     }
-    // removeBook();
+    
+
 });
 
 
-//Set a variable to be = title.textContent of the item that's selected
-//splice out "title.textContent" variable from the array using a function that checks
-//the array index against the title, and removes it when you click delete          
+// looks in myLibrary array for the title, passed in from the delete button event listener above, then deletes from array
 
-// function removeBook(){
-//     for(let i = myLibrary.length - 1; i >= 0; i--){
-//         if(myLibrary[i].title == title){
-//             myLibrary.splice(i, 1);
-//         }
-//     }
-// };
+function removeBook(bookToDelete){
+    if(myLibrary[bookToDelete]){
+        delete myLibrary[bookToDelete]
+    };
+};

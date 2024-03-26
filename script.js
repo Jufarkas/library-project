@@ -52,11 +52,17 @@ class NewBook {
     static addBtnListeners(){
         // clears any previous values; opens dialog box to submit new book
         const addNewBook = document.querySelector('.showDialog');
+        const closeDialog = document.querySelector('.formCancel');
         let submit = document.querySelector('.formConfirm');
         addNewBook.addEventListener('click', () => {
             document.querySelector('form').reset();
             this.dialog.showModal();
         });
+
+        closeDialog.addEventListener('click', (e) => {
+            e.preventDefault();
+            this.dialog.close();
+        })
 
         // Grabs form input values via IDs; creates new Book via function; closes dialog box
         submit.addEventListener('click', (e) => {

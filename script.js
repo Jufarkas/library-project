@@ -52,19 +52,32 @@ class NewBook {
     static addBtnListeners(){
         // clears any previous values; opens dialog box to submit new book
         const addNewBook = document.querySelector('.showDialog');
-        const submit = document.querySelector('.formConfirm');
+        let submit = document.querySelector('.formConfirm');
         addNewBook.addEventListener('click', () => {
-            document.getElementById('bookTitle').value = '';
-            document.getElementById('bookAuthor').value = '';
-            document.getElementById('bookPages').value = '';
+            document.querySelector('form').reset();
             this.dialog.showModal();
         });
 
         // Grabs form input values via IDs; creates new Book via function; closes dialog box
         submit.addEventListener('click', (e) => {
             e.preventDefault();
-            this.title = document.getElementById('bookTitle').value;
-            this.author = document.getElementById('bookAuthor').value;
+            let title = document.getElementById('bookTitle').value;
+            let author = document.getElementById('bookAuthor').value;
+            let titleCheck = /^(?=.*[^\s])[a-zA-Z0-9\s]*$/.test(title);
+            let authorCheck = /^(?=.*[^\s])[a-zA-Z\s]*$/.test(author);
+            if (!titleCheck){
+                const bookTitle = document.getElementById('bookTitle');
+                bookTitle.setCustomValidity("Min 2 characters, no special characters");
+                bookTitle.reportValidity();
+                return;
+            } else if (!authorCheck){
+                const bookAuthor = document.getElementById('bookAuthor');
+                bookAuthor.setCustomValidity("Min 2 characters, no special characters or numbers");
+                bookAuthor.reportValidity();
+                return;
+            }
+            this.title = title;
+            this.author = author;
             this.pages = document.getElementById('bookPages').value;
             this.hasRead = document.getElementById('readStatus').value;
             NewBook.createNewBook(this.title, this.author, this.pages, this.hasRead);
